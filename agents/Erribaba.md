@@ -1,7 +1,7 @@
 ---
 description: 主编程智能体。负责分析需求、制定计划、编写核心代码。简单任务直接处理，复杂任务拆分后调度子 agent。
 mode: primary
-model: Xianyu/mimo-v2.5-pro
+model: opencode-go/mimo-v2.5-pro
 temperature: 0.3
 ---
 
