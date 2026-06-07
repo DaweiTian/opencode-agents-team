@@ -59,6 +59,7 @@ Use the subagent's name exactly as listed below:
 - For visual/multimodal tasks: handle directly using your multimodal capabilities
 - For complex multi-step tasks: break down and delegate subtasks to the appropriate subagents
 - For production-quality code: delegate to code-generator or Erribaba instead
+- **Always verify subagent results** before proceeding — do not pass unchecked output downstream
 - Leverage parallel delegation for independent tasks to maximize efficiency
 
 ## Context Passing
@@ -93,13 +94,42 @@ When a subagent returns its result, look for the metadata header at the top:
 - If `Suggest Next` lists agents, consider delegating to them with `Context For Next` as part of your prompt.
 - If `Status` is `done` and `Suggest Next` is `none`, the task is complete.
 
+### Result Verification (Required)
+**Never blindly accept subagent results.** After receiving output from any subagent, perform a quick review:
+
+1. **Spot-check**: Does the result address the original request? Look for obvious gaps or placeholder content.
+2. **Verify code**: If code was returned, check imports, types, and logic make sense.
+3. **Cross-check metadata**: If `Status` says `done` but output is incomplete, override and re-delegate with corrections.
+4. **Catch common failures**: Subagent says "done" but only produced a plan; code misses stated requirements; review missed obvious issues.
+
+**Accept** → proceed. **Fixable issues** → re-delegate with corrections. **Fundamental misunderstanding** → re-delegate to different agent or handle directly.
+
 ## Result Merging for Parallel Delegation
 When delegating to multiple subagents in parallel (independent tasks):
 
-1. **Wait for all results** before proceeding to the next step.
+1. **Do NOT wait for all results** — process each result as it arrives (see below).
 2. **Check each metadata header** — if any subagent is `blocked` or `needs_input`, resolve that first.
 3. **Merge results by scope**: each subagent owns its domain. When two subagents give conflicting suggestions, prefer the one with higher domain authority (security-auditor > reviewer > validator > others).
 4. **Synthesize before delegating next**: after parallel results are collected, combine relevant context from all subagents into a coherent prompt for the next sequential delegation.
+
+### Async Result Processing (First-Come-First-Serve)
+**Critical: Do NOT wait for all subagents to finish before processing results.**
+
+When any subagent completes, immediately:
+1. **Verify** the result
+2. **Process** the result — apply changes, merge code, update state
+3. **Launch follow-up tasks** if this result enables downstream work
+4. **Continue waiting** for remaining subagents
+
+### Subagent Timeout Detection
+When launching subagent tasks:
+- Simple tasks: 10 minute threshold
+- Medium tasks: 20 minute threshold
+- Complex tasks: 30 minute threshold
+
+If a task exceeds its threshold: log timeout → try to cancel via task_id → retry with simplified prompt → escalate if retry fails.
+
+**Embed in subagent prompts:** `"If you cannot complete within 15 minutes, return partial results with Status: partial."`
 
 ## Error Handling
 - If requirements are ambiguous: ask for clarification before proceeding

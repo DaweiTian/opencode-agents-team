@@ -1,18 +1,30 @@
-# Opencode-agents
+# opencode-agentcrew
 
-A ready-to-use collection of 26 OpenCode agent configurations covering architecture, code review, debugging, testing, frontend development, and more.
+**A ready-to-use OpenCode agent team with 26 specialized roles covering the full-stack development workflow.**
+
+## ✨ Features
+
+- **26 Specialized Agents** — Architecture design, code generation, debugging, testing, frontend development, security audit, and more
+- **Dual Primary Agents** — Erribaba (production code) + Zero (rapid prototyping/multimodal)
+- **Multi-Model Collaboration** — 7 models including MiMo-V2.5, GLM-5.1, Kimi K2.6, Qwen3.6 Plus, DeepSeek V4 Pro
+- **Image Handling** — Auto-intercept pasted images, delegate to vision-dev for analysis
+- **Ready to Use** — One-command installation, automatic configuration
 
 ## Quick Install
 
-### One-Click Install (Recommended)
+### Linux / macOS
 
 ```bash
 curl -fsSL https://gitee.com/aerlee/opencode-agents/raw/master/install.sh | bash
 ```
 
-The script automatically:
-- Downloads all agent files to `~/.config/opencode/agents/`
-- Backs up existing agent configurations (if any)
+### Windows (PowerShell)
+
+```powershell
+irm https://gitee.com/aerlee/opencode-agents/raw/master/install.ps1 | iex
+```
+
+> The script automatically downloads all agent files to `~/.config/opencode/agents/` and backs up existing configurations.
 
 ### Manual Install
 
@@ -41,9 +53,11 @@ This agent collection requires multiple models working together. We recommend th
 | Kimi K2.5 | 1,850 | 4,630 | 9,250 |
 | MiMo-V2.5 | 30,100 | 75,200 | 150,400 |
 | MiMo-V2.5-Pro | 3,250 | 8,150 | 16,300 |
+| MiniMax M3 | 1,400 | 3,500 | 7,000 |
 | MiniMax M2.7 | 3,400 | 8,500 | 17,000 |
 | MiniMax M2.5 | 6,300 | 15,900 | 31,800 |
 | Qwen3.7 Max | 950 | 2,390 | 4,770 |
+| Qwen3.7 Plus | 4,300 | 10,800 | 21,600 |
 | Qwen3.6 Plus | 3,300 | 8,200 | 16,300 |
 | DeepSeek V4 Pro | 3,450 | 8,550 | 17,150 |
 | DeepSeek V4 Flash | 31,650 | 79,050 | 158,150 |

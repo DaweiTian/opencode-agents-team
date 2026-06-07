@@ -35,6 +35,15 @@ mkdir -p "$TARGET_DIR"
 echo "📂 安装 agents 到: $TARGET_DIR"
 cp "$TEMP_DIR"/agents/*.md "$TARGET_DIR/"
 
+# 复制 plugins 文件
+PLUGIN_DIR="${HOME}/.config/opencode/plugins"
+if ls "$TEMP_DIR"/plugins/*.js &>/dev/null || ls "$TEMP_DIR"/plugins/*.ts &>/dev/null; then
+    mkdir -p "$PLUGIN_DIR"
+    echo "🔌 安装 plugins 到: $PLUGIN_DIR"
+    cp "$TEMP_DIR"/plugins/*.js "$PLUGIN_DIR/" 2>/dev/null || true
+    cp "$TEMP_DIR"/plugins/*.ts "$PLUGIN_DIR/" 2>/dev/null || true
+fi
+
 # 清理
 rm -rf "$TEMP_DIR"
 

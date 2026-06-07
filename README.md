@@ -1,18 +1,30 @@
-# Opencode-agents
+# opencode-agentcrew
 
-一套开箱即用的 OpenCode 智能体配置集合，涵盖架构设计、代码审查、调试、测试、前端开发等 26 个专业角色。
+**开箱即用的 OpenCode 智能体团队，26 个专业角色覆盖全栈开发流程。**
+
+## ✨ 特点
+
+- **26 个专业智能体** — 架构设计、代码生成、调试诊断、测试编写、前端开发、安全审计等
+- **双主智能体** — Erribaba（生产代码）+ Zero（快速原型/多模态）
+- **多模型协作** — MiMo-V2.5、GLM-5.1、Kimi K2.6、Qwen3.6 Plus、DeepSeek V4 Pro 等 7 个模型
+- **图片处理** — 自动拦截粘贴图片，委托 vision-dev 分析
+- **开箱即用** — 一条命令安装，自动配置
 
 ## 快速安装
 
-### 一键安装（推荐）
+### Linux / macOS
 
 ```bash
 curl -fsSL https://gitee.com/aerlee/opencode-agents/raw/master/install.sh | bash
 ```
 
-脚本会自动：
-- 下载所有智能体文件到 `~/.config/opencode/agents/`
-- 备份已有的智能体配置（如有）
+### Windows (PowerShell)
+
+```powershell
+irm https://gitee.com/aerlee/opencode-agents/raw/master/install.ps1 | iex
+```
+
+> 脚本会自动下载所有智能体文件到 `~/.config/opencode/agents/`，并备份已有配置。
 
 ### 手动安装
 
@@ -41,9 +53,11 @@ rm -rf /tmp/opencode-agents
 | Kimi K2.5 | 1,850 | 4,630 | 9,250 |
 | MiMo-V2.5 | 30,100 | 75,200 | 150,400 |
 | MiMo-V2.5-Pro | 3,250 | 8,150 | 16,300 |
+| MiniMax M3 | 1,400 | 3,500 | 7,000 |
 | MiniMax M2.7 | 3,400 | 8,500 | 17,000 |
 | MiniMax M2.5 | 6,300 | 15,900 | 31,800 |
 | Qwen3.7 Max | 950 | 2,390 | 4,770 |
+| Qwen3.7 Plus | 4,300 | 10,800 | 21,600 |
 | Qwen3.6 Plus | 3,300 | 8,200 | 16,300 |
 | DeepSeek V4 Pro | 3,450 | 8,550 | 17,150 |
 | DeepSeek V4 Flash | 31,650 | 79,050 | 158,150 |

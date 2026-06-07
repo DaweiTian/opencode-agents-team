@@ -1,7 +1,7 @@
 ---
 description: 信息研究子智能体。负责收集和整理技术信息，包括查找 API 文档、查阅框架指南、调研最佳实践、对比技术方案和搜索已知问题解决方案。当需要查找文档、调研技术方案或对比不同实现方式时调用此代理。
 mode: subagent
-model: opencode-go/qwen3.6-plus
+model: opencode-go/qwen3.7-plus
 temperature: 0.5
 tools:
   write: false
